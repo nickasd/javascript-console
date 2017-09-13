@@ -1,0 +1,125 @@
+.javascript-console {
+	background: white;
+	display: flex;
+	flex-flow: column;
+}
+
+.toolbar {
+	border-bottom: 1px solid #C8C8C8;
+	box-shadow: 0 1px 2px #C8C8C8;
+	width: 100%;
+}
+
+.toolbar > * {
+	float: left;
+}
+
+.toolbar .fa {
+	padding: 0.6em;
+}
+
+.toolbar .filter {
+	border: 1px solid #DCDCDC;
+	border-radius: 0.5em;
+	font-size: 0.9em;
+	margin: 0.4em 0.5em 0 0.5em;
+	outline: none;
+	padding: 0.1em 0.5em 0.1em 0.5em;
+	width: 10em;
+}
+
+.history {
+	flex-grow: 1;
+	font-size: 0.9em;
+	overflow-y: auto;
+	padding-top: 2px;
+	width: 100%;
+}
+
+.history .line {
+	border-bottom: 1px solid #ddd;
+	display: block;
+	font: 0.95em monospace, monospace;
+	line-height: 2em;
+	overflow: hidden;
+	padding: 0 0.5em 0 0.5em;
+	word-wrap: break-word;
+}
+
+.history .line .fa {
+	margin-right: 0.4em;
+	text-align: center;
+	width: 1em;
+}
+
+.history .line.error, .history .line.assert, .history .line.exception {
+	background: rgba(235, 57, 65, 0.1);
+	color: rgb(235, 57, 65);
+}
+
+.history .line.warn {
+	background: rgba(227, 179, 14, 0.1);
+	color: rgb(227, 179, 14);
+}
+
+.history .line.info {
+	background: rgba(42, 83, 205, 0.1);
+	color: rgb(42, 83, 205);
+}
+
+.history .line.log, .history .line.count, .history .line.code {
+	color: #888;
+}
+
+.history .fileref {
+	float: right;
+	margin-left: 1em;
+}
+
+.history .filtered-out {
+	display: none;
+}
+
+.history .content span + span {
+	margin-left: 0.8em;
+}
+
+.history .keyword {
+	font-style: italic;
+}
+
+.history .expandable {
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+.history .expansion {
+	display: none;
+}
+
+.history .expansion.expanded {
+	display: inline;
+}
+
+.history .indent {
+	background: #F0F0F0;
+	padding-left: 2em;
+}
+
+.history a {
+	color: inherit;
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+.code-input {
+	border: none;
+	border-radius: 0;
+	border-top: 1px solid #C8C8C8;
+	box-shadow: 0 -1px 2px #C8C8C8;
+	box-sizing: border-box;
+	font-size: 0.8em;
+	outline: none;
+	padding: 0.4em 0.6em 0.4em 0.6em;
+	width: 100%;
+}

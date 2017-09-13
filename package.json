@@ -1,0 +1,30 @@
+{
+	"name": "javascript-console",
+	"version": "1.0.0",
+	"description": "A JavaScript console for the browser.",
+	"main": "javascript-console.js",
+	"scripts": {
+		"start": "cd example && browserify client.js -o dist/bundle.js && node server.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/nickasd/javascript-console.git"
+	},
+	"keywords": [
+		"javascript",
+		"console"
+	],
+	"author": "Nicolas Kick",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/nickasd/javascript-console/issues"
+	},
+	"dependencies": {
+		"font-awesome": "^4.7.0",
+		"stacktrace-js": "^2.0.0"
+	},
+	"devDependencies": {
+		"browserify": "^14.4.0",
+		"express": "^4.15.2"
+	}
+}
