@@ -22,10 +22,12 @@ var jsConsole = new JavaScriptConsole(view, {
 
 var clientId = '1';
 jsConsole.attachToWindow(window);
-jsConsole.setColor(clientId, 'green');
 
 jsConsole.append(clientId, 'log', null, 'A log added programmatically with a clientId');
 console.warn('<b>HTML tags</b> are escaped');
 console.log('Logging an object:', {a: 'Hello!'});
 console.log('Logging an array:', [{b: 'It\'s me again!'}, {c: 'I have nothing more to say.'}]);
-asd.asd;
+jsConsole.setColor(clientId, 'green');
+setTimeout(() => {
+jsConsole.setColor(clientId, null);
+}, 1000);

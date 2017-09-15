@@ -1,6 +1,11 @@
 # JavaScript Console
 A JavaScript console that runs in the browser.
 
+- Intercept logs and errors from one or more windows/iframes
+- Ability to set a custom color for each window
+- Inspect logged objects inline with a click
+- Filter by name
+
 ## Usage
 
 Intercepting logs and errors from a window:
@@ -20,8 +25,7 @@ var args = ['Logging with clientId', clientId];
 jsConsole.append(clientId, 'log', null, ...args);
 ```
 
-A full
-example is available at [example](https://github.com/nickasd/javascript-console/tree/master/example).
+A full example is available at [example](https://github.com/nickasd/javascript-console/tree/master/example).
 
 ## Install with NPM
 

@@ -1,6 +1,5 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 var JavaScriptConsole = require('../javascript-console');
-var StackTrace = require('stacktrace-js');
 
 var view = document.getElementById('console');
 var jsConsole = new JavaScriptConsole(view, {
@@ -24,16 +23,17 @@ var jsConsole = new JavaScriptConsole(view, {
 
 var clientId = '1';
 jsConsole.attachToWindow(window);
-jsConsole.setColor(clientId, 'green');
 
-var stack = StackTrace.getSync();
-jsConsole.append(clientId, 'log', stack, 'A log added programmatically with a clientId');
+jsConsole.append(clientId, 'log', null, 'A log added programmatically with a clientId');
 console.warn('<b>HTML tags</b> are escaped');
 console.log('Logging an object:', {a: 'Hello!'});
 console.log('Logging an array:', [{b: 'It\'s me again!'}, {c: 'I have nothing more to say.'}]);
-asd.asd;
+jsConsole.setColor(clientId, 'green');
+setTimeout(() => {
+jsConsole.setColor(clientId, null);
+}, 1000);
 
-},{"../javascript-console":2,"stacktrace-js":16}],2:[function(require,module,exports){
+},{"../javascript-console":2}],2:[function(require,module,exports){
 var StackTrace = require('stacktrace-js');
 var Path = require('path');
 
@@ -66,6 +66,8 @@ class JavaScriptConsole {
 		this.history = [];
 		this.historyIndex = 0;
 		this.colors = {};
+		this.localColor = 'black';
+		this.disabledColor = '#999';
 		this.objects = {};
 		this.nextObjectId = 1;
 
@@ -225,7 +227,12 @@ class JavaScriptConsole {
 	 * @param {String} color - The color to be associated with the given clientId.
 	 */
 	setColor(clientId, color) {
-		this.colors[clientId] = color;
+//		if (color) {
+			this.colors[clientId] = color;
+//		} else {
+//			delete this.colors[clientId];
+//			color = this.disabledColor;
+//		}
 		for (var line of this.historyView.querySelectorAll(`[data-client-id="${clientId}"]`)) {
 			line.getElementsByClassName('content')[0].style.color = color;
 		}
@@ -280,7 +287,7 @@ class JavaScriptConsole {
 			content += fileref;
 		}
 		content += args.map((arg) => this.parseArg(arg)).join('');
-		var color = (clientId ? this.colors[clientId] || '#999' : 'black');
+		var color = (clientId ? this.colors[clientId] || this.disabledColor : this.localColor);
 		content = `<span class="content" style="color:${color}">${content}</span>`;
 		var icons = {log: 'angle-left', info: 'info-circle', warn: 'warning',
 			error: 'times', count: 'angle-left', assert: 'exclamation',

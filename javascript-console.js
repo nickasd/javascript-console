@@ -30,6 +30,8 @@ class JavaScriptConsole {
 		this.history = [];
 		this.historyIndex = 0;
 		this.colors = {};
+		this.localColor = 'black';
+		this.disabledColor = '#999';
 		this.objects = {};
 		this.nextObjectId = 1;
 
@@ -189,7 +191,12 @@ class JavaScriptConsole {
 	 * @param {String} color - The color to be associated with the given clientId.
 	 */
 	setColor(clientId, color) {
-		this.colors[clientId] = color;
+		if (color) {
+			this.colors[clientId] = color;
+		} else {
+			delete this.colors[clientId];
+			color = this.disabledColor;
+		}
 		for (var line of this.historyView.querySelectorAll(`[data-client-id="${clientId}"]`)) {
 			line.getElementsByClassName('content')[0].style.color = color;
 		}
@@ -244,7 +251,7 @@ class JavaScriptConsole {
 			content += fileref;
 		}
 		content += args.map((arg) => this.parseArg(arg)).join('');
-		var color = (clientId ? this.colors[clientId] || '#999' : 'black');
+		var color = (clientId ? this.colors[clientId] || this.disabledColor : this.localColor);
 		content = `<span class="content" style="color:${color}">${content}</span>`;
 		var icons = {log: 'angle-left', info: 'info-circle', warn: 'warning',
 			error: 'times', count: 'angle-left', assert: 'exclamation',
